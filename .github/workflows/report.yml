@@ -28,6 +28,7 @@ jobs:
           UNRELEASED_GH_TOKEN: ${{ secrets.UNRELEASED_GH_TOKEN }}
         run: |
           unreleased report \
+            --config-path unreleased.toml \
             --output-format html \
             --html-output dist/index.html \
             --html-title "@dhth's unreleased code"
