@@ -1,0 +1,40 @@
+name: report
+
+on:
+  schedule:
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+env:
+  UNRELEASED_VERSION: v0.1.0-alpha.1
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install unreleased
+        uses: jaxxstorm/action-install-gh-release@6096f2a2bbfee498ced520b6922ac2c06e990ed2 # v2.1.0
+        with:
+          repo: dhth/unreleased
+          tag: ${{ env.UNRELEASED_VERSION }}
+      - uses: actions/checkout@v6
+      - name: Generate report
+        env:
+          UNRELEASED_GH_TOKEN: ${{ secrets.UNRELEASED_GH_TOKEN }}
+        run: |
+          unreleased report \
+            --output-format html \
+            --html-output dist/index.html \
+            --html-title "@dhth's unreleased code"
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: "dist"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
