@@ -1,0 +1,86 @@
+[[repos]]
+repo = "dhth/act3"
+
+[[repos]]
+repo = "dhth/bmm"
+
+[[repos]]
+repo = "dhth/commits"
+
+[[repos]]
+repo = "dhth/cueitup"
+
+[[repos]]
+repo = "dhth/dfft"
+
+[[repos]]
+repo = "dhth/dstll"
+
+[[repos]]
+repo = "dhth/ecscope"
+
+[[repos]]
+repo = "dhth/ecsv"
+
+[[repos]]
+repo = "dhth/envee"
+consider_prereleases = true
+
+[[repos]]
+repo = "dhth/hours"
+
+[[repos]]
+repo = "dhth/kplay"
+
+[[repos]]
+repo = "dhth/mrj"
+
+[[repos]]
+repo = "dhth/mult"
+
+[[repos]]
+repo = "dhth/omm"
+
+[[repos]]
+repo = "dhth/outtasync"
+
+[[repos]]
+repo = "dhth/prs"
+
+[[repos]]
+repo = "dhth/punchout"
+
+[[repos]]
+repo = "dhth/schemas"
+
+[[repos]]
+repo = "dhth/shfl"
+
+[[repos]]
+repo = "dhth/squidge"
+
+[[repos]]
+repo = "dhth/squish"
+
+[[repos]]
+repo = "dhth/tash"
+
+[[repos]]
+repo = "dhth/tbll"
+
+[[repos]]
+repo = "dhth/tflens"
+consider_prereleases = true
+
+[[repos]]
+repo = "dhth/ting"
+
+[[repos]]
+repo = "dhth/tomo"
+
+[[repos]]
+repo = "dhth/unreleased"
+consider_prereleases = true
+
+[[repos]]
+repo = "dhth/urll"
