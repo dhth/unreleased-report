@@ -27,6 +27,9 @@ repo = "dhth/envee"
 consider_prereleases = true
 
 [[repos]]
+repo = "dhth/graphc"
+
+[[repos]]
 repo = "dhth/hours"
 
 [[repos]]
