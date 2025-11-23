@@ -54,6 +54,8 @@ jobs:
     if: ${{ needs.changes.outputs.static == 'true' }}
     runs-on: ubuntu-latest
     permissions:
+      contents: read
+      id-token: write
       pages: write
     steps:
       - name: Install unreleased
