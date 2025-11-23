@@ -32,7 +32,7 @@ jobs:
             --config-path unreleased.toml \
             --output-format html \
             --html-output dist/index.html \
-            --html-title "@dhth's unreleased code"
+            --html-template static/template.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
