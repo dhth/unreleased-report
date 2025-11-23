@@ -1,13 +1,7 @@
-name: ci
+name: pr
 
 on:
   pull_request:
-  push:
-    branches:
-      - 'main'
-
-env:
-  UNRELEASED_VERSION: v0.1.0-alpha.1
 
 jobs:
   changes:
@@ -16,7 +10,6 @@ jobs:
       pull-requests: read
       contents: read
     outputs:
-      sh: ${{ steps.filter.outputs.sh }}
       workflows: ${{ steps.filter.outputs.workflows }}
       yml: ${{ steps.filter.outputs.yml }}
     steps:

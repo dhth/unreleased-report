@@ -1,0 +1,80 @@
+name: main
+
+on:
+  push:
+    branches:
+      - 'main'
+
+env:
+  UNRELEASED_VERSION: v0.1.0-alpha.1
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      static: ${{ steps.filter.outputs.static }}
+      workflows: ${{ steps.filter.outputs.workflows }}
+      yml: ${{ steps.filter.outputs.yml }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            static:
+              - "static/**"
+              - ".github/workflows/ci.yml"
+            workflows:
+              - ".github/workflows/**.yml"
+            yml:
+              - "**.yml"
+              - "**.yaml"
+
+  lint-yaml:
+    needs: changes
+    if: ${{ needs.changes.outputs.yml == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - uses: dhth/composite-actions/.github/actions/lint-yaml@main
+
+  lint-workflows:
+    needs: changes
+    if: ${{ needs.changes.outputs.workflows == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - uses: dhth/composite-actions/.github/actions/lint-actions@main
+
+  deploy:
+    needs: changes
+    if: ${{ needs.changes.outputs.static == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+    steps:
+      - name: Install unreleased
+        uses: jaxxstorm/action-install-gh-release@6096f2a2bbfee498ced520b6922ac2c06e990ed2 # v2.1.0
+        with:
+          repo: dhth/unreleased
+          tag: ${{ env.UNRELEASED_VERSION }}
+      - uses: actions/checkout@v6
+      - name: Generate report
+        env:
+          UNRELEASED_GH_TOKEN: ${{ secrets.UNRELEASED_GH_TOKEN }}
+        run: |
+          unreleased report \
+            --config-path unreleased.toml \
+            --output-format html \
+            --html-output dist/index.html \
+            --html-template static/template.html
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: "dist"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
