@@ -23,7 +23,7 @@ jobs:
         with:
           repo: dhth/unreleased
           tag: ${{ env.UNRELEASED_VERSION }}
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Generate report
         env:
           UNRELEASED_GH_TOKEN: ${{ secrets.UNRELEASED_GH_TOKEN }}
