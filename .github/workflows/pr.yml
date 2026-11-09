@@ -21,9 +21,14 @@ jobs:
           filters: |
             workflows:
               - ".github/workflows/**.yml"
+              - ".github/jactionlint.yaml"
+              - "mise.toml"
+              - "mise.lock"
             yml:
               - "**.yml"
               - "**.yaml"
+              - "mise.toml"
+              - "mise.lock"
 
   lint-yaml:
     needs: changes
@@ -32,7 +37,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
-      - uses: dhth/composite-actions/.github/actions/lint-yaml@main
+      - name: Set up mise
+        uses: jdx/mise-action@v4
+        with:
+          install_args: yamlfmt
+      - name: Lint YAML files
+        run: mise run lint:yaml
 
   lint-workflows:
     needs: changes
@@ -41,4 +51,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
-      - uses: dhth/composite-actions/.github/actions/lint-actions@main
+      - name: Set up mise
+        uses: jdx/mise-action@v4
+        with:
+          install_args: jactionlint
+      - name: Lint workflows
+        run: mise run lint:actions

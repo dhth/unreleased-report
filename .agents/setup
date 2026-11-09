@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ ! -x "$HOME/.local/bin/mise" ]; then
+	curl -fsSL https://mise.run/bash | sh
+fi
+
+# Put mise-managed tools on PATH for non-interactive login shells.
+shims_line='export PATH="$HOME/.local/share/mise/shims:$PATH" # mise shims'
+grep -Fqx "$shims_line" "$HOME/.bash_profile" 2>/dev/null || echo "$shims_line" >>"$HOME/.bash_profile"
+
+"$HOME/.local/bin/mise" trust
+"$HOME/.local/bin/mise" install --locked

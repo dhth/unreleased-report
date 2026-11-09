@@ -5,14 +5,10 @@ on:
     branches:
       - 'main'
 
-env:
-  UNRELEASED_VERSION: v0.1.0-alpha.1
-
 jobs:
   changes:
     runs-on: ubuntu-latest
     outputs:
-      static: ${{ steps.filter.outputs.static }}
       workflows: ${{ steps.filter.outputs.workflows }}
       yml: ${{ steps.filter.outputs.yml }}
     steps:
@@ -22,14 +18,16 @@ jobs:
         id: filter
         with:
           filters: |
-            static:
-              - "static/**"
-              - ".github/workflows/ci.yml"
             workflows:
               - ".github/workflows/**.yml"
+              - ".github/jactionlint.yaml"
+              - "mise.toml"
+              - "mise.lock"
             yml:
               - "**.yml"
               - "**.yaml"
+              - "mise.toml"
+              - "mise.lock"
 
   lint-yaml:
     needs: changes
@@ -38,7 +36,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
-      - uses: dhth/composite-actions/.github/actions/lint-yaml@main
+      - name: Set up mise
+        uses: jdx/mise-action@v4
+        with:
+          install_args: yamlfmt
+      - name: Lint YAML files
+        run: mise run lint:yaml
 
   lint-workflows:
     needs: changes
@@ -47,36 +50,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
-      - uses: dhth/composite-actions/.github/actions/lint-actions@main
-
-  deploy:
-    needs: changes
-    if: ${{ needs.changes.outputs.static == 'true' }}
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
-      pages: write
-    steps:
-      - name: Install unreleased
-        uses: jaxxstorm/action-install-gh-release@25e24d2d23ae098373794ef1d6faecb48ee52da8 # v3.0.0
+      - name: Set up mise
+        uses: jdx/mise-action@v4
         with:
-          repo: dhth/unreleased
-          tag: ${{ env.UNRELEASED_VERSION }}
-      - uses: actions/checkout@v7
-      - name: Generate report
-        env:
-          UNRELEASED_GH_TOKEN: ${{ secrets.UNRELEASED_GH_TOKEN }}
-        run: |
-          unreleased report \
-            --config-path unreleased.toml \
-            --output-format html \
-            --html-output dist/index.html \
-            --html-template static/template.html
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: "dist"
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+          install_args: jactionlint
+      - name: Lint workflows
+        run: mise run lint:actions
