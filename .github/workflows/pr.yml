@@ -3,9 +3,13 @@ name: pr
 on:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   changes:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       pull-requests: read
       contents: read
@@ -14,8 +18,8 @@ jobs:
       yml: ${{ steps.filter.outputs.yml }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
-      - uses: dorny/paths-filter@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4.0.3
         id: filter
         with:
           filters: |
@@ -34,11 +38,12 @@ jobs:
     needs: changes
     if: ${{ needs.changes.outputs.yml == 'true' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Set up mise
-        uses: jdx/mise-action@v4
+        uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
         with:
           install_args: yamlfmt
       - name: Lint YAML files
@@ -48,11 +53,12 @@ jobs:
     needs: changes
     if: ${{ needs.changes.outputs.workflows == 'true' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Set up mise
-        uses: jdx/mise-action@v4
+        uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
         with:
           install_args: jactionlint
       - name: Lint workflows

@@ -2,47 +2,6 @@
 
 lockfile_version = 4
 
-[[tools."github:dhth/unreleased"]]
-version = "0.1.1"
-backend = "github:dhth/unreleased"
-specifiers = ["latest"]
-
-[tools."github:dhth/unreleased"."platforms.linux-arm64"]
-checksum = "sha256:0e797e15776170a595b657646a0c8cd50131d91ba783722d4b3308df27de67d5"
-url = "https://github.com/dhth/unreleased/releases/download/v0.1.1/unreleased-aarch64-unknown-linux-gnu.tar.xz"
-url_api = "https://api.github.com/repos/dhth/unreleased/releases/assets/421327855"
-provenance = "github-attestations"
-
-[tools."github:dhth/unreleased"."platforms.linux-arm64-musl"]
-checksum = "sha256:0e797e15776170a595b657646a0c8cd50131d91ba783722d4b3308df27de67d5"
-url = "https://github.com/dhth/unreleased/releases/download/v0.1.1/unreleased-aarch64-unknown-linux-gnu.tar.xz"
-url_api = "https://api.github.com/repos/dhth/unreleased/releases/assets/421327855"
-provenance = "github-attestations"
-
-[tools."github:dhth/unreleased"."platforms.linux-x64"]
-checksum = "sha256:ab4a18f27edf07c54180f04cf5400859df7e6f917a21d886f7a8c4480d884314"
-url = "https://github.com/dhth/unreleased/releases/download/v0.1.1/unreleased-x86_64-unknown-linux-gnu.tar.xz"
-url_api = "https://api.github.com/repos/dhth/unreleased/releases/assets/421327861"
-provenance = "github-attestations"
-
-[tools."github:dhth/unreleased"."platforms.linux-x64-musl"]
-checksum = "sha256:ab4a18f27edf07c54180f04cf5400859df7e6f917a21d886f7a8c4480d884314"
-url = "https://github.com/dhth/unreleased/releases/download/v0.1.1/unreleased-x86_64-unknown-linux-gnu.tar.xz"
-url_api = "https://api.github.com/repos/dhth/unreleased/releases/assets/421327861"
-provenance = "github-attestations"
-
-[tools."github:dhth/unreleased"."platforms.macos-arm64"]
-checksum = "sha256:4c1de6c727c94d1e0da39ebc6a660d03576c4ae126a399d1f54aa3b10a7a96e2"
-url = "https://github.com/dhth/unreleased/releases/download/v0.1.1/unreleased-aarch64-apple-darwin.tar.xz"
-url_api = "https://api.github.com/repos/dhth/unreleased/releases/assets/421327849"
-provenance = "github-attestations"
-
-[tools."github:dhth/unreleased"."platforms.macos-x64"]
-checksum = "sha256:f17b935e4e10ebec8dff179502ce55292b6d682092dc4608c414499a5d128d80"
-url = "https://github.com/dhth/unreleased/releases/download/v0.1.1/unreleased-x86_64-apple-darwin.tar.xz"
-url_api = "https://api.github.com/repos/dhth/unreleased/releases/assets/421327858"
-provenance = "github-attestations"
-
 [[tools.jactionlint]]
 version = "2.5.0"
 backend = "packslip:github.com/jdx/jactionlint"
@@ -89,6 +48,47 @@ checksum = "sha256:6f6202d6fc476cbe3978c7dd2349c881cfcfa98257593cb2f1bde87004f05
 url = "https://github.com/jdx/jactionlint/releases/download/v2.5.0/jactionlint_2.5.0_windows_amd64.zip"
 signer = "sigstore-oidc:https://github.com/jdx/jactionlint/.github/workflows/release.yaml"
 repository_ids = { repository = "1404951382" }
+
+[[tools.unreleased]]
+version = "0.1.1"
+backend = "github:dhth/unreleased"
+specifiers = ["0.1.1"]
+
+[tools.unreleased."platforms.linux-arm64"]
+checksum = "sha256:0e797e15776170a595b657646a0c8cd50131d91ba783722d4b3308df27de67d5"
+url = "https://github.com/dhth/unreleased/releases/download/v0.1.1/unreleased-aarch64-unknown-linux-gnu.tar.xz"
+url_api = "https://api.github.com/repos/dhth/unreleased/releases/assets/421327855"
+provenance = "github-attestations"
+
+[tools.unreleased."platforms.linux-arm64-musl"]
+checksum = "sha256:0e797e15776170a595b657646a0c8cd50131d91ba783722d4b3308df27de67d5"
+url = "https://github.com/dhth/unreleased/releases/download/v0.1.1/unreleased-aarch64-unknown-linux-gnu.tar.xz"
+url_api = "https://api.github.com/repos/dhth/unreleased/releases/assets/421327855"
+provenance = "github-attestations"
+
+[tools.unreleased."platforms.linux-x64"]
+checksum = "sha256:ab4a18f27edf07c54180f04cf5400859df7e6f917a21d886f7a8c4480d884314"
+url = "https://github.com/dhth/unreleased/releases/download/v0.1.1/unreleased-x86_64-unknown-linux-gnu.tar.xz"
+url_api = "https://api.github.com/repos/dhth/unreleased/releases/assets/421327861"
+provenance = "github-attestations"
+
+[tools.unreleased."platforms.linux-x64-musl"]
+checksum = "sha256:ab4a18f27edf07c54180f04cf5400859df7e6f917a21d886f7a8c4480d884314"
+url = "https://github.com/dhth/unreleased/releases/download/v0.1.1/unreleased-x86_64-unknown-linux-gnu.tar.xz"
+url_api = "https://api.github.com/repos/dhth/unreleased/releases/assets/421327861"
+provenance = "github-attestations"
+
+[tools.unreleased."platforms.macos-arm64"]
+checksum = "sha256:4c1de6c727c94d1e0da39ebc6a660d03576c4ae126a399d1f54aa3b10a7a96e2"
+url = "https://github.com/dhth/unreleased/releases/download/v0.1.1/unreleased-aarch64-apple-darwin.tar.xz"
+url_api = "https://api.github.com/repos/dhth/unreleased/releases/assets/421327849"
+provenance = "github-attestations"
+
+[tools.unreleased."platforms.macos-x64"]
+checksum = "sha256:f17b935e4e10ebec8dff179502ce55292b6d682092dc4608c414499a5d128d80"
+url = "https://github.com/dhth/unreleased/releases/download/v0.1.1/unreleased-x86_64-apple-darwin.tar.xz"
+url_api = "https://api.github.com/repos/dhth/unreleased/releases/assets/421327858"
+provenance = "github-attestations"
 
 [[tools.yamlfmt]]
 version = "0.21.0"
