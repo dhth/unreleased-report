@@ -1,0 +1,28 @@
+[tools]
+"github:dhth/unreleased" = "latest"
+jactionlint = "latest"
+yamlfmt = "latest"
+
+[tasks.report]
+description = "Generate the HTML report"
+run = '''
+unreleased report \
+	--config-path unreleased.toml \
+	--output-format html \
+	--html-output dist/index.html \
+	--html-template static/template.html
+'''
+
+[tasks."lint:actions"]
+description = "Lint GitHub Actions workflows"
+run = "jactionlint"
+
+[tasks."lint:yaml"]
+description = "Lint YAML files"
+run = '''
+yamlfmt \
+	-lint \
+	-quiet \
+	-formatter 'retain_line_breaks_single=true' \
+	$(git ls-files '*.yml' '*.yaml')
+'''
