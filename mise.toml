@@ -1,5 +1,8 @@
+[tool_alias]
+unreleased = "github:dhth/unreleased"
+
 [tools]
-"github:dhth/unreleased" = "latest"
+unreleased = "0.1.1"
 jactionlint = "latest"
 yamlfmt = "latest"
 

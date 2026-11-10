@@ -5,6 +5,8 @@ updates:
     schedule:
       interval: "cron"
       cronjob: "0 5 9,23 * *"
+    cooldown:
+      default-days: 7
     labels:
       - "dependencies"
     commit-message:
